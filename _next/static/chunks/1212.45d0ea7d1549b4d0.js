@@ -498,8 +498,8 @@
                     name: "memory",
                     options: {},
                     hasItem: t => e.has(t),
-                    getItem: t => e.get(t) ? ? null,
-                    getItemRaw: t => e.get(t) ? ? null,
+                    getItem: t => e.get(t) ?? null,
+                    getItemRaw: t => e.get(t) ?? null,
                     setItem(t, r) {
                         e.set(t, r)
                     },
@@ -555,7 +555,7 @@
                         name: "idb-keyval",
                         options: e,
                         hasItem: async e => !(typeof await L(i(e), t) > "u"),
-                        getItem: async e => await L(i(e), t) ? ? null,
+                        getItem: async e => await L(i(e), t) ?? null,
                         setItem: (e, r) => (function(e, t, r = j()) {
                             return r("readwrite", r => (r.put(t, e), D(r.transaction)))
                         })(i(e), r, t),
@@ -1095,15 +1095,15 @@
             }
 
             function eR(e) {
-                let t = e ? .type || 0;
+                let t = e ?.type || 0;
                 if (1 === t) {
-                    if (typeof e ? .senderPublicKey > "u") throw Error("missing sender public key");
-                    if (typeof e ? .receiverPublicKey > "u") throw Error("missing receiver public key")
+                    if (typeof e ?.senderPublicKey > "u") throw Error("missing sender public key");
+                    if (typeof e ?.receiverPublicKey > "u") throw Error("missing receiver public key")
                 }
                 return {
                     type: t,
-                    senderPublicKey: e ? .senderPublicKey,
-                    receiverPublicKey: e ? .receiverPublicKey
+                    senderPublicKey: e ?.senderPublicKey,
+                    receiverPublicKey: e ?.receiverPublicKey
                 }
             }
 
@@ -1196,7 +1196,7 @@
             }
 
             function eW(e) {
-                return e ? .relay || {
+                return e ?.relay || {
                     protocol: "irn"
                 }
             }
@@ -1415,7 +1415,7 @@
                 return new Promise(t => {
                     switch (e) {
                         case ej.browser:
-                            t(eM() && navigator ? .onLine);
+                            t(eM() && navigator ?.onLine);
                             break;
                         case ej.reactNative:
                             t(te());
@@ -1429,7 +1429,7 @@
             async function te() {
                 if (eq() && "u" > typeof r.g && null != r.g && r.g.NetInfo) {
                     let e = await (null == r.g ? void 0 : r.g.NetInfo.fetch());
-                    return e ? .isConnected
+                    return e ?.isConnected
                 }
                 return !0
             }
@@ -1539,7 +1539,7 @@
                     this.events.getMaxListeners() > 10 && this.events.setMaxListeners(10)
                 }
                 emitError(e) {
-                    let t = this.parseError(Error(e ? .message || `WebSocket connection failed for host: ${tn(this.url)}`));
+                    let t = this.parseError(Error(e ?.message || `WebSocket connection failed for host: ${tn(this.url)}`));
                     return this.events.emit("register_error", t), t
                 }
             }
@@ -2311,7 +2311,7 @@
                             return eR({
                                 type: eP(r.type),
                                 senderPublicKey: "u" > typeof r.senderPublicKey ? (0, h.BB)(r.senderPublicKey, ew) : void 0,
-                                receiverPublicKey: t ? .receiverPublicKey
+                                receiverPublicKey: t ?.receiverPublicKey
                             })
                         }(t, r);
                         if (eN(i)) {
@@ -2455,11 +2455,11 @@
                             }
                         });
                         try {
-                            let n = r ? .ttl || rI,
+                            let n = r ?.ttl || rI,
                                 s = eW(r),
-                                o = r ? .prompt || !1,
-                                a = r ? .tag || 0,
-                                c = r ? .id || (0, tr.getBigIntRpcId)().toString(),
+                                o = r ?.prompt || !1,
+                                a = r ?.tag || 0,
+                                c = r ?.id || (0, tr.getBigIntRpcId)().toString(),
                                 u = {
                                     topic: e,
                                     message: t,
@@ -2475,7 +2475,7 @@
                             try {
                                 await await eH(this.rpcPublish(e, t, n, s, o, a, c), this.publishTimeout, "Failed to publish payload, please try again."), this.removeRequestFromQueue(c), this.relayer.events.emit(rO.publish, u)
                             } catch (e) {
-                                if (this.logger.debug("Publishing Payload stalled"), this.needsTransportRestart = !0, null != (i = r ? .internal) && i.throwOnFailedPublish) throw this.removeRequestFromQueue(c), e;
+                                if (this.logger.debug("Publishing Payload stalled"), this.needsTransportRestart = !0, null != (i = r ?.internal) && i.throwOnFailedPublish) throw this.removeRequestFromQueue(c), e;
                                 return
                             } finally {
                                 clearTimeout(l)
@@ -2628,7 +2628,7 @@
                             throw this.logger.debug("Failed to Subscribe Topic"), this.logger.error(e), e
                         }
                     }, this.unsubscribe = async (e, t) => {
-                        await this.restartToComplete(), this.isInitialized(), "u" > typeof t ? .id ? await this.unsubscribeById(e, t.id, t) : await this.unsubscribeByTopic(e, t)
+                        await this.restartToComplete(), this.isInitialized(), "u" > typeof t ?.id ? await this.unsubscribeById(e, t.id, t) : await this.unsubscribeByTopic(e, t)
                     }, this.isSubscribed = async e => !!this.topics.includes(e) || await new Promise((t, r) => {
                         let i = new p.Watch;
                         i.start(this.pendingSubscriptionWatchLabel);
@@ -2948,7 +2948,7 @@
                         this.provider.on(rR.payload, this.onPayloadHandler), this.provider.on(rR.connect, this.onConnectHandler), this.provider.on(rR.disconnect, this.onDisconnectHandler), this.provider.on(rR.error, this.onProviderErrorHandler)
                     }, this.core = e.core, this.logger = "u" > typeof e.logger && "string" != typeof e.logger ? (0, G.generateChildLogger)(e.logger, this.name) : (0, G.pino)((0, G.getDefaultLoggerOptions)({
                         level: e.logger || "error"
-                    })), this.messages = new r$(this.logger, e.core), this.subscriber = new rX(this, this.logger), this.publisher = new rH(this, this.logger), this.relayUrl = e ? .relayUrl || rS, this.projectId = e.projectId, this.bundleId = function() {
+                    })), this.messages = new r$(this.logger, e.core), this.subscriber = new rX(this, this.logger), this.publisher = new rH(this, this.logger), this.relayUrl = e ?.relayUrl || rS, this.projectId = e.projectId, this.bundleId = function() {
                         var e;
                         try {
                             return eq() && "u" > typeof r.g && "u" > typeof(null == r.g ? void 0 : r.g.Application) ? null == (e = r.g.Application) ? void 0 : e.applicationId : void 0
@@ -3172,7 +3172,7 @@
                                 !eq() && eM() && (window.addEventListener("online", () => e(!0)), window.addEventListener("offline", () => e(!1)));
                                 break;
                             case ej.reactNative:
-                                eq() && "u" > typeof r.g && null != r.g && r.g.NetInfo && r.g ? .NetInfo.addEventListener(t => e(t ? .isConnected));
+                                eq() && "u" > typeof r.g && null != r.g && r.g.NetInfo && r.g ?.NetInfo.addEventListener(t => e(t ?.isConnected));
                             case ej.node:
                         }
                     }(async t => {
@@ -3227,7 +3227,7 @@
                     super(e, t, r, i), this.core = e, this.logger = t, this.name = r, this.map = new Map, this.version = "0.3", this.cached = [], this.initialized = !1, this.storagePrefix = rm, this.init = async () => {
                         this.initialized || (this.logger.trace("Initialized"), await this.restore(), this.cached.forEach(e => {
                             var t;
-                            this.getKey && null !== e && !e4(e) ? this.map.set(this.getKey(e), e) : (null == (t = e ? .proposer) ? void 0 : t.publicKey) ? this.map.set(e.id, e) : e ? .topic && this.map.set(e.topic, e)
+                            this.getKey && null !== e && !e4(e) ? this.map.set(this.getKey(e), e) : (null == (t = e ?.proposer) ? void 0 : t.publicKey) ? this.map.set(e.id, e) : e ?.topic && this.map.set(e.topic, e)
                         }), this.cached = [], this.initialized = !0)
                     }, this.set = async (e, t) => {
                         this.isInitialized(), this.map.has(e) ? await this.update(e, t) : (this.logger.debug("Setting value"), this.logger.trace({
@@ -3555,7 +3555,7 @@
                             throw Error(t)
                         }
                         let r = e1(e.uri);
-                        if (!(null != (t = r ? .relay) && t.protocol)) {
+                        if (!(null != (t = r ?.relay) && t.protocol)) {
                             let {
                                 message: e
                             } = e3("MISSING_OR_INVALID", "pair() uri#relay-protocol");
@@ -3989,7 +3989,7 @@
                 constructor(e, t) {
                     super(e, t), this.projectId = e, this.logger = t, this.name = rj, this.initialized = !1, this.queue = [], this.verifyDisabled = !1, this.init = async e => {
                         if (this.verifyDisabled || eq() || !eM()) return;
-                        let t = this.getVerifyUrl(e ? .verifyUrl);
+                        let t = this.getVerifyUrl(e ?.verifyUrl);
                         this.verifyUrl !== t && this.removeIframe(), this.verifyUrl = t;
                         try {
                             await this.createIframe()
@@ -4009,7 +4009,7 @@
                     }, this.resolve = async e => {
                         let t;
                         if (this.isDevEnv) return "";
-                        let r = this.getVerifyUrl(e ? .verifyUrl);
+                        let r = this.getVerifyUrl(e ?.verifyUrl);
                         try {
                             t = await this.fetchAttestation(e.attestationId, r)
                         } catch (i) {
@@ -4078,11 +4078,11 @@
                 };
             class iy extends Q {
                 constructor(e) {
-                    super(e), this.protocol = "wc", this.version = 2, this.name = rv, this.events = new n.EventEmitter, this.initialized = !1, this.on = (e, t) => this.events.on(e, t), this.once = (e, t) => this.events.once(e, t), this.off = (e, t) => this.events.off(e, t), this.removeListener = (e, t) => this.events.removeListener(e, t), this.projectId = e ? .projectId, this.relayUrl = e ? .relayUrl || rS, this.customStoragePrefix = null != e && e.customStoragePrefix ? `:${e.customStoragePrefix}` : "";
-                    let t = "u" > typeof e ? .logger && "string" != typeof e ? .logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
-                        level: e ? .logger || r_.logger
+                    super(e), this.protocol = "wc", this.version = 2, this.name = rv, this.events = new n.EventEmitter, this.initialized = !1, this.on = (e, t) => this.events.on(e, t), this.once = (e, t) => this.events.once(e, t), this.off = (e, t) => this.events.off(e, t), this.removeListener = (e, t) => this.events.removeListener(e, t), this.projectId = e ?.projectId, this.relayUrl = e ?.relayUrl || rS, this.customStoragePrefix = null != e && e.customStoragePrefix ? `:${e.customStoragePrefix}` : "";
+                    let t = "u" > typeof e ?.logger && "string" != typeof e ?.logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
+                        level: e ?.logger || r_.logger
                     }));
-                    this.logger = (0, G.generateChildLogger)(t, this.name), this.heartbeat = new W.HeartBeat, this.crypto = new rk(this, this.logger, e ? .keychain), this.history = new io(this, this.logger), this.expirer = new ia(this, this.logger), this.storage = null != e && e.storage ? e.storage : new F(ig(ig({}, rw), e ? .storageOptions)), this.relayer = new r4({
+                    this.logger = (0, G.generateChildLogger)(t, this.name), this.heartbeat = new W.HeartBeat, this.crypto = new rk(this, this.logger, e ?.keychain), this.history = new io(this, this.logger), this.expirer = new ia(this, this.logger), this.storage = null != e && e.storage ? e.storage : new F(ig(ig({}, rw), e ?.storageOptions)), this.relayer = new r4({
                         core: this,
                         logger: this.logger,
                         relayUrl: this.relayUrl,
@@ -4177,7 +4177,7 @@
                 try {
                     if (!i) return;
                     let n = "string" == typeof i ? JSON.parse(i) : i,
-                        s = n ? .href;
+                        s = n ?.href;
                     if ("string" != typeof s) return;
                     s.endsWith("/") && (s = s.slice(0, -1));
                     let o = `${s}/wc?requestId=${e}&sessionTopic=${t}`,
@@ -4385,7 +4385,7 @@
                     var i;
                     let n;
                     if (r) return;
-                    let s = (i = `${t}, namespace`, n = null, i$(e ? .methods) ? i$(e ? .events) || (n = iU("UNSUPPORTED_EVENTS", `${i}, events should be an array of strings or empty array for no events`)) : n = iU("UNSUPPORTED_METHODS", `${i}, methods should be an array of strings or empty array for no methods`), n);
+                    let s = (i = `${t}, namespace`, n = null, i$(e ?.methods) ? i$(e ?.events) || (n = iU("UNSUPPORTED_EVENTS", `${i}, events should be an array of strings or empty array for no events`)) : n = iU("UNSUPPORTED_METHODS", `${i}, methods should be an array of strings or empty array for no methods`), n);
                     s && (r = s)
                 }), r
             }
@@ -4400,7 +4400,7 @@
                         var r, n;
                         let s;
                         if (i) return;
-                        let o = (r = e ? .accounts, n = `${t} namespace`, s = null, ij(r) ? r.forEach(e => {
+                        let o = (r = e ?.accounts, n = `${t} namespace`, s = null, ij(r) ? r.forEach(e => {
                             s || function(e) {
                                 if (iM(e, !1) && e.includes(":")) {
                                     let t = e.split(":");
@@ -4456,7 +4456,7 @@
                             if (r.includes(":")) t[r] = e[r];
                             else {
                                 let i = iC(e[r].accounts);
-                                i ? .forEach(i => {
+                                i ?.forEach(i => {
                                     t[i] = {
                                         accounts: e[r].accounts.filter(e => e.includes(`${i}:`)),
                                         methods: e[r].methods,
@@ -4675,7 +4675,7 @@
                             h = nn({
                                 requiredNamespaces: i,
                                 optionalNamespaces: n,
-                                relays: o ? ? [{
+                                relays: o ?? [{
                                     protocol: "irn"
                                 }],
                                 proposer: {
@@ -4760,7 +4760,7 @@
                             topic: o,
                             result: {
                                 relay: {
-                                    protocol: r ? ? "irn"
+                                    protocol: r ?? "irn"
                                 },
                                 responderPublicKey: l
                             }
@@ -4769,7 +4769,7 @@
                         }));
                         let f = nn({
                             relay: {
-                                protocol: r ? ? "irn"
+                                protocol: r ?? "irn"
                             },
                             namespaces: i,
                             requiredNamespaces: c,
@@ -5564,7 +5564,7 @@
                             } = iD("MISSING_OR_INVALID", "onSessionSettleRequest() relay protocol should be a string");
                             throw Error(e)
                         }
-                        let o = (t = null, iM(i ? .publicKey, !1) || (t = iD("MISSING_OR_INVALID", "onSessionSettleRequest() controller public key should be a string")), t);
+                        let o = (t = null, iM(i ?.publicKey, !1) || (t = iD("MISSING_OR_INVALID", "onSessionSettleRequest() controller public key should be a string")), t);
                         if (o) throw Error(o.message);
                         let a = iV(n, "onSessionSettleRequest()");
                         if (a) throw Error(a.message);
@@ -5989,16 +5989,16 @@
                         } catch (e) {
                             throw this.logger.error(e.message), e
                         }
-                    }, this.name = e ? .name || iX.name, this.metadata = e ? .metadata || (0, d.D)() || {
+                    }, this.name = e ?.name || iX.name, this.metadata = e ?.metadata || (0, d.D)() || {
                         name: "",
                         description: "",
                         url: "",
                         icons: [""]
                     };
-                    let t = "u" > typeof e ? .logger && "string" != typeof e ? .logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
-                        level: e ? .logger || iX.logger
+                    let t = "u" > typeof e ?.logger && "string" != typeof e ?.logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
+                        level: e ?.logger || iX.logger
                     }));
-                    this.core = e ? .core || new iy(e), this.logger = (0, G.generateChildLogger)(t, this.name), this.session = new nc(this.core, this.logger), this.proposal = new na(this.core, this.logger), this.pendingRequest = new nu(this.core, this.logger), this.engine = new no(this)
+                    this.core = e ?.core || new iy(e), this.logger = (0, G.generateChildLogger)(t, this.name), this.session = new nc(this.core, this.logger), this.proposal = new na(this.core, this.logger), this.pendingRequest = new nu(this.core, this.logger), this.engine = new no(this)
                 }
                 static async init(e) {
                     let t = new nl(e);
@@ -8169,7 +8169,7 @@
 
                             function nb(e, t) {
                                 var r = typeof e;
-                                return !!(t = t ? ? 9007199254740991) && ("number" == r || "symbol" != r && eh.test(e)) && e > -1 && e % 1 == 0 && e < t
+                                return !!(t = t ?? 9007199254740991) && ("number" == r || "symbol" != r && eh.test(e)) && e > -1 && e % 1 == 0 && e < t
                             }
 
                             function nE(e, t, r) {
@@ -10326,9 +10326,9 @@ function print() { __p += __j.call(arguments, '') }
                 n6 = (e, t) => nQ(e, nY(t));
             class n3 {
                 constructor(e) {
-                    this.events = new(s()), this.rpcProviders = {}, this.shouldAbortPairingAttempt = !1, this.maxPairingAttempts = 10, this.disableProviderPing = !1, this.providerOpts = e, this.logger = "u" > typeof e ? .logger && "string" != typeof e ? .logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
-                        level: e ? .logger || nm
-                    })), this.disableProviderPing = e ? .disableProviderPing || !1
+                    this.events = new(s()), this.rpcProviders = {}, this.shouldAbortPairingAttempt = !1, this.maxPairingAttempts = 10, this.disableProviderPing = !1, this.providerOpts = e, this.logger = "u" > typeof e ?.logger && "string" != typeof e ?.logger ? e.logger : (0, G.pino)((0, G.getDefaultLoggerOptions)({
+                        level: e ?.logger || nm
+                    })), this.disableProviderPing = e ?.disableProviderPing || !1
                 }
                 static async init(e) {
                     let t = new n3(e);
@@ -10590,7 +10590,7 @@ function print() { __p += __j.call(arguments, '') }
                     t && Object.keys(t).length && (this.namespaces = t), r && Object.keys(r).length && (this.optionalNamespaces = r), this.sessionProperties = i, this.persist("namespaces", t), this.persist("optionalNamespaces", r)
                 }
                 validateChain(e) {
-                    let [t, r] = e ? .split(":") || ["", ""];
+                    let [t, r] = e ?.split(":") || ["", ""];
                     if (!this.namespaces || !Object.keys(this.namespaces).length) return [t, r];
                     if (t && !Object.keys(this.namespaces || {}).map(e => nf(e)).includes(t)) throw Error(`Namespace '${t}' is not configured. Please call connect() first with namespace config.`);
                     if (t && r) return [t, r];
@@ -10706,12 +10706,12 @@ function print() { __p += __j.call(arguments, '') }
                                     [sc(t)]: a[sc(t)]
                                 } : {})
                             },
-                            u = s ? .filter(e => !n8.includes(e)),
-                            l = i ? .filter(e => !n2.includes(e));
+                            u = s ?.filter(e => !n8.includes(e)),
+                            l = i ?.filter(e => !n2.includes(e));
                         if (!r && !o && !n && !(null != u && u.length) && !(null != l && l.length)) return {
                             required: t.length ? c : void 0
                         };
-                        let h = u ? .length && l ? .length || !r,
+                        let h = u ?.length && l ?.length || !r,
                             p = {
                                 chains: [...new Set(h ? c.chains.concat(r || []) : r)],
                                 methods: [...new Set(c.methods.concat(null != n && n.length ? n : n4))],
@@ -10737,7 +10737,7 @@ function print() { __p += __j.call(arguments, '') }
                                     [this.namespace]: r
                                 }
                             }), {
-                                pairingTopic: e ? .pairingTopic
+                                pairingTopic: e ?.pairingTopic
                             })).then(e => {
                                 i(e)
                             }).catch(e => {
@@ -10844,18 +10844,18 @@ function print() { __p += __j.call(arguments, '') }
                 }
                 getRpcConfig(e) {
                     var t, r;
-                    let i = null != (t = e ? .chains) ? t : [],
-                        n = null != (r = e ? .optionalChains) ? r : [],
+                    let i = null != (t = e ?.chains) ? t : [],
+                        n = null != (r = e ?.optionalChains) ? r : [],
                         s = i.concat(n);
                     if (!s.length) throw Error("No chains specified in either `chains` or `optionalChains`");
-                    let o = i.length ? e ? .methods || n2 : [],
-                        a = i.length ? e ? .events || n8 : [],
-                        c = e ? .optionalMethods || [],
-                        u = e ? .optionalEvents || [],
-                        l = e ? .rpcMap || this.buildRpcMap(s, e.projectId),
-                        h = e ? .qrModalOptions || void 0;
+                    let o = i.length ? e ?.methods || n2 : [],
+                        a = i.length ? e ?.events || n8 : [],
+                        c = e ?.optionalMethods || [],
+                        u = e ?.optionalEvents || [],
+                        l = e ?.rpcMap || this.buildRpcMap(s, e.projectId),
+                        h = e ?.qrModalOptions || void 0;
                     return {
-                        chains: i ? .map(e => this.formatChainId(e)),
+                        chains: i ?.map(e => this.formatChainId(e)),
                         optionalChains: n.map(e => this.formatChainId(e)),
                         methods: o,
                         events: a,
@@ -10910,9 +10910,9 @@ function print() { __p += __j.call(arguments, '') }
                         rpcMap: i
                     } = e;
                     t && m(t) && (this.rpc.chains = t.map(e => this.formatChainId(e)), t.forEach(e => {
-                        this.rpc.rpcMap[e] = i ? .[e] || this.getRpcUrl(e)
-                    })), r && m(r) && (this.rpc.optionalChains = [], this.rpc.optionalChains = r ? .map(e => this.formatChainId(e)), r.forEach(e => {
-                        this.rpc.rpcMap[e] = i ? .[e] || this.getRpcUrl(e)
+                        this.rpc.rpcMap[e] = i ?.[e] || this.getRpcUrl(e)
+                    })), r && m(r) && (this.rpc.optionalChains = [], this.rpc.optionalChains = r ?.map(e => this.formatChainId(e)), r.forEach(e => {
+                        this.rpc.rpcMap[e] = i ?.[e] || this.getRpcUrl(e)
                     }))
                 }
                 getRpcUrl(e, t) {
@@ -10923,7 +10923,7 @@ function print() { __p += __j.call(arguments, '') }
                     if (!this.session) return;
                     let e = await this.signer.client.core.storage.getItem(`${this.STORAGE_KEY}/chainId`),
                         t = this.session.namespaces[`${this.namespace}:${e}`] ? this.session.namespaces[`${this.namespace}:${e}`] : this.session.namespaces[this.namespace];
-                    this.setChainIds(e ? [this.formatChainId(e)] : t ? .accounts), this.setAccounts(t ? .accounts)
+                    this.setChainIds(e ? [this.formatChainId(e)] : t ?.accounts), this.setAccounts(t ?.accounts)
                 }
                 reset() {
                     this.chainId = 1, this.accounts = []

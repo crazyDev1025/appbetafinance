@@ -499,7 +499,7 @@
             }
 
             function u(e) {
-                return !!e && (d(e) || Array.isArray(e) || !!e[o] || !!e.constructor ? .[o] || g(e) || b(e))
+                return !!e && (d(e) || Array.isArray(e) || !!e[o] || !!e.constructor ?.[o] || g(e) || b(e))
             }
             var f = Object.prototype.constructor.toString();
 
@@ -661,7 +661,7 @@
                         let r = y(e);
                         if (!m(r, t)) return function(e, t, r) {
                             let n = j(t, r);
-                            return n ? "value" in n ? n.value : n.get ? .call(e.draft_) : void 0
+                            return n ? "value" in n ? n.value : n.get ?.call(e.draft_) : void 0
                         }(e, r, t);
                         let n = r[t];
                         return e.finalized_ || !u(n) ? n : n === N(e.base_, t) ? (Z(e), e.copy_[t] = W(n, e)) : n
@@ -670,10 +670,10 @@
                     ownKeys: e => Reflect.ownKeys(y(e)),
                     set(e, t, r) {
                         let n = j(y(e), t);
-                        if (n ? .set) return n.set.call(e.draft_, r), !0;
+                        if (n ?.set) return n.set.call(e.draft_, r), !0;
                         if (!e.modified_) {
                             let n = N(y(e), t),
-                                a = n ? .[i];
+                                a = n ?.[i];
                             if (a && a.base_ === r) return e.copy_[t] = r, e.assigned_[t] = !1, !0;
                             if ((r === n ? 0 !== r || 1 / r == 1 / n : r != r && n != n) && (void 0 !== r || m(e.base_, t))) return !0;
                             Z(e), U(e)
@@ -801,7 +801,7 @@
                                 r = e, n = t
                             });
                             return [a, r, n]
-                        }, "boolean" == typeof e ? .autoFreeze && this.setAutoFreeze(e.autoFreeze), "boolean" == typeof e ? .useStrictShallowCopy && this.setUseStrictShallowCopy(e.useStrictShallowCopy)
+                        }, "boolean" == typeof e ?.autoFreeze && this.setAutoFreeze(e.autoFreeze), "boolean" == typeof e ?.useStrictShallowCopy && this.setUseStrictShallowCopy(e.useStrictShallowCopy)
                     }
                     createDraft(e) {
                         var t;
@@ -1065,7 +1065,7 @@
                     return n
                 }
             });
-            let n = 2 n ** 256 n - 1 n
+            let n = 2n ** 256n - 1n
         },
         77918: function(e, t, r) {
             r.d(t, {

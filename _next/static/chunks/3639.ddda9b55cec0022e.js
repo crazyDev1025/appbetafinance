@@ -19857,7 +19857,7 @@ ${a(t)}`, {
                     } = t, {
                         path: s
                     } = t, a = 0 === s.length ? n : `At path: ${s.join(".")} -- ${n}`;
-                    super(i ? ? a), null != i && (this.cause = a), Object.assign(this, o), this.name = this.constructor.name, this.failures = () => r ? ? (r = [t, ...e()])
+                    super(i ?? a), null != i && (this.cause = a), Object.assign(this, o), this.name = this.constructor.name, this.failures = () => r ?? (r = [t, ...e()])
                 }
             }
 
@@ -20072,11 +20072,11 @@ ${a(t)}`, {
                     type: "lazy",
                     schema: null,
                     * entries(r, n) {
-                        e ? ? (e = t()), yield* e.entries(r, n)
+                        e ?? (e = t()), yield* e.entries(r, n)
                     },
-                    validator: (r, n) => (e ? ? (e = t()), e.validator(r, n)),
-                    coercer: (r, n) => (e ? ? (e = t()), e.coercer(r, n)),
-                    refiner: (r, n) => (e ? ? (e = t()), e.refiner(r, n))
+                    validator: (r, n) => (e ?? (e = t()), e.validator(r, n)),
+                    coercer: (r, n) => (e ?? (e = t()), e.coercer(r, n)),
+                    refiner: (r, n) => (e ?? (e = t()), e.refiner(r, n))
                 })
             }
 

@@ -1712,7 +1712,7 @@
 
                     function S(e) {
                         var t;
-                        let r = (null == (t = c.current) ? void 0 : t.filter) ? ? eU;
+                        let r = (null == (t = c.current) ? void 0 : t.filter) ?? eU;
                         return e ? r(e, n.current.search) : 0
                     }
 
@@ -1731,7 +1731,7 @@
                         D().sort((t, r) => {
                             let n = t.getAttribute(eZ),
                                 o = r.getAttribute(eZ);
-                            return (e.get(o) ? ? 0) - (e.get(n) ? ? 0)
+                            return (e.get(o) ?? 0) - (e.get(n) ?? 0)
                         }).forEach(e => {
                             let t = e.closest(eM);
                             t ? t.appendChild(e.parentElement === t ? e : e.closest(`${eM} > *`)) : o.appendChild(e.parentElement === o ? e : e.closest(`${eM} > *`))

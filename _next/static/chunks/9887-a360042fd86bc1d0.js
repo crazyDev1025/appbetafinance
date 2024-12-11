@@ -427,12 +427,12 @@
                                                 var l = e.join("-");
                                                 return o.validators.find(function(r) {
                                                     return (0, r.validator)(l)
-                                                }) ? .classGroupId
+                                                }) ?.classGroupId
                                             }
                                         }(e, p) || function(r) {
                                             if (t.test(r)) {
                                                 var e = t.exec(r)[1],
-                                                    o = e ? .substring(0, e.indexOf(":"));
+                                                    o = e ?.substring(0, e.indexOf(":"));
                                                 if (o) return "arbitrary.." + o
                                             }
                                         }(r)

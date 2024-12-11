@@ -2577,10 +2577,10 @@
                         if (!(0, c.ac)(this, i)) {
                             let t = (await Promise.all([r.e(1328), r.e(3639), r.e(7097)]).then(r.t.bind(r, 53639, 19))).default;
                             "function" != typeof t && "function" == typeof t.default && (t = t.default), (0, c.qx)(this, n, new t(this.options));
-                            let e = c.ac(this, n).walletExtension ? .getChainId(),
+                            let e = c.ac(this, n).walletExtension ?.getChainId(),
                                 o = this.chains.find(t => this.options.chainId ? t.id === this.options.chainId : t.id === e) || this.chains[0],
-                                s = this.options.chainId || o ? .id,
-                                a = this.options.jsonRpcUrl || o ? .rpcUrls.default.http[0];
+                                s = this.options.chainId || o ?.id,
+                                a = this.options.jsonRpcUrl || o ?.rpcUrls.default.http[0];
                             (0, c.qx)(this, i, (0, c.ac)(this, n).makeWeb3Provider(a, s))
                         }
                         return (0, c.ac)(this, i)
@@ -2613,7 +2613,7 @@
                                 params: [{
                                     chainId: r
                                 }]
-                            }), this.chains.find(e => e.id === t) ? ? {
+                            }), this.chains.find(e => e.id === t) ?? {
                                 id: t,
                                 name: `Chain ${r}`,
                                 network: `${r}`,
@@ -2644,7 +2644,7 @@
                                         chainId: r,
                                         chainName: n.name,
                                         nativeCurrency: n.nativeCurrency,
-                                        rpcUrls: [n.rpcUrls.public ? .http[0] ? ? ""],
+                                        rpcUrls: [n.rpcUrls.public ?.http[0] ?? ""],
                                         blockExplorerUrls: this.getBlockExplorerUrls(n)
                                     }]
                                 }), n
@@ -2847,12 +2847,12 @@
                             shimDisconnect: !0,
                             getProvider() {
                                 function t(t) {
-                                    let e = !!t ? .isMetaMask;
+                                    let e = !!t ?.isMetaMask;
                                     if (e && (!t.isBraveWallet || t._events || t._state) && !t.isApexWallet && !t.isAvalanche && !t.isBitKeep && !t.isBlockWallet && !t.isCoin98 && !t.isFordefi && !t.isMathWallet && !t.isOkxWallet && !t.isOKExWallet && !t.isOneInchIOSWallet && !t.isOneInchAndroidWallet && !t.isOpera && !t.isPortal && !t.isRabby && !t.isDefiant && !t.isTokenPocket && !t.isTokenary && !t.isZeal && !t.isZerion) return t
                                 }
                                 if ("undefined" == typeof window) return;
                                 let e = window.ethereum;
-                                return e ? .providers ? e.providers.find(t) : t(e)
+                                return e ?.providers ? e.providers.find(t) : t(e)
                             },
                             ...e
                         };
@@ -2871,7 +2871,7 @@
                                 type: "connecting"
                             });
                             let r = null;
-                            if ((0, u.ac)(this, n) && this.options ? .shimDisconnect && !this.storage ? .getItem(this.shimDisconnectKey)) {
+                            if ((0, u.ac)(this, n) && this.options ?.shimDisconnect && !this.storage ?.getItem(this.shimDisconnectKey)) {
                                 r = await this.getAccount().catch(() => null);
                                 let t = !!r;
                                 if (t) try {
@@ -2898,7 +2898,7 @@
                                 let e = await this.switchChain(t);
                                 i = e.id, o = this.isChainUnsupported(i)
                             }
-                            return this.options ? .shimDisconnect && this.storage ? .setItem(this.shimDisconnectKey, !0), {
+                            return this.options ?.shimDisconnect && this.storage ?.setItem(this.shimDisconnectKey, !0), {
                                 account: r,
                                 chain: {
                                     id: i,
@@ -3055,8 +3055,8 @@
                         try {
                             let e = t;
                             if (!e) {
-                                let t = this.storage ? .getItem("store"),
-                                    r = t ? .state ? .data ? .chain ? .id;
+                                let t = this.storage ?.getItem("store"),
+                                    r = t ?.state ?.data ?.chain ?.id;
                                 r && !this.isChainUnsupported(r) && (e = r)
                             }
                             let r = await this.getProvider({
@@ -3070,7 +3070,7 @@
                                 s = (0, c.K)(n[0]),
                                 a = await this.getChainId(),
                                 l = this.isChainUnsupported(a),
-                                h = r.connector ? .peerMeta ? .name ? ? "";
+                                h = r.connector ?.peerMeta ?.name ?? "";
                             return p.test(h) && (this.switchChain = (0, u.U9)(this, i, o)), {
                                 account: s,
                                 chain: {
@@ -3102,14 +3102,14 @@
                         create: e
                     } = {}) {
                         if (!(0, u.ac)(this, n) || t || e) {
-                            let e = this.options ? .infuraId ? {} : this.chains.reduce((t, e) => ({ ...t,
+                            let e = this.options ?.infuraId ? {} : this.chains.reduce((t, e) => ({ ...t,
                                     [e.id]: e.rpcUrls.default.http[0]
                                 }), {}),
                                 i = (await Promise.all([r.e(1328), r.e(9943), r.e(6637), r.e(3978)]).then(r.bind(r, 83978))).default;
                             (0, u.qx)(this, n, new i({ ...this.options,
                                 chainId: t,
                                 rpc: { ...e,
-                                    ...this.options ? .rpc
+                                    ...this.options ?.rpc
                                 }
                             })), (0, u.ac)(this, n).http = await (0, u.ac)(this, n).setHttpProvider(t)
                         }
@@ -3153,8 +3153,8 @@
                     }), new Promise(e => this.on("change", ({
                         chain: r
                     }) => {
-                        r ? .id === t && e(t)
-                    }))]), this.chains.find(e => e.id === t) ? ? {
+                        r ?.id === t && e(t)
+                    }))]), this.chains.find(e => e.id === t) ?? {
                         id: t,
                         name: `Chain ${r}`,
                         network: `${r}`,
@@ -3173,7 +3173,7 @@
                         }
                     }
                 } catch (e) {
-                    let t = "string" == typeof e ? e : e ? .message;
+                    let t = "string" == typeof e ? e : e ?.message;
                     if (/user rejected request/i.test(t)) throw new l.ab(e);
                     throw new l.x3(e)
                 }
@@ -4106,9 +4106,9 @@
                         try {
                             let r = t;
                             if (!r) {
-                                let t = this.storage ? .getItem("store"),
-                                    e = t ? .state ? .data ? .chain ? .id;
-                                r = e && !this.isChainUnsupported(e) ? e : this.chains[0] ? .id
+                                let t = this.storage ?.getItem("store"),
+                                    e = t ?.state ?.data ?.chain ?.id;
+                                r = e && !this.isChainUnsupported(e) ? e : this.chains[0] ?.id
                             }
                             if (!r) throw Error("No chains found on connector.");
                             let n = await this.getProvider();
@@ -4137,7 +4137,7 @@
                                 }
                             }
                         } catch (t) {
-                            if (/user rejected/i.test(t ? .message)) throw new N.ab(t);
+                            if (/user rejected/i.test(t ?.message)) throw new N.ab(t);
                             throw t
                         }
                     }
@@ -4209,7 +4209,7 @@
                                     method: K,
                                     params: [{
                                         chainId: (0, B.eC)(e.id),
-                                        blockExplorerUrls: [e.blockExplorers ? .default ? .url],
+                                        blockExplorerUrls: [e.blockExplorers ?.default ?.url],
                                         chainName: e.name,
                                         nativeCurrency: e.nativeCurrency,
                                         rpcUrls: [...e.rpcUrls.default.http]
@@ -4225,7 +4225,7 @@
                                 }]
                             }), e
                         } catch (e) {
-                            let t = "string" == typeof e ? e : e ? .message;
+                            let t = "string" == typeof e ? e : e ?.message;
                             if (/user rejected request/i.test(t)) throw new N.ab(e);
                             throw new N.x3(e)
                         }
@@ -4271,23 +4271,23 @@
             }, d = new WeakSet, p = function() {
                 (0, E.ac)(this, n) && ((0, E.ac)(this, n).removeListener("accountsChanged", this.onAccountsChanged), (0, E.ac)(this, n).removeListener("chainChanged", this.onChainChanged), (0, E.ac)(this, n).removeListener("disconnect", this.onDisconnect), (0, E.ac)(this, n).removeListener("session_delete", this.onDisconnect), (0, E.ac)(this, n).removeListener("display_uri", this.onDisplayUri), (0, E.ac)(this, n).removeListener("connect", this.onConnect))
             }, y = new WeakSet, b = function(t) {
-                this.storage ? .setItem(H, t)
+                this.storage ?.setItem(H, t)
             }, D = new WeakSet, m = function() {
-                return this.storage ? .getItem(H) ? ? []
+                return this.storage ?.getItem(H) ?? []
             }, g = new WeakSet, w = function() {
                 if (!(0, E.ac)(this, n)) return [];
-                let t = E.ac(this, n).session ? .namespaces;
+                let t = E.ac(this, n).session ?.namespaces;
                 if (!t) return [];
                 let e = F(t),
-                    r = e[R] ? .chains ? .map(t => parseInt(t.split(":")[1] || ""));
-                return r ? ? []
+                    r = e[R] ?.chains ?.map(t => parseInt(t.split(":")[1] || ""));
+                return r ?? []
             }, v = new WeakSet, _ = function() {
                 if (!(0, E.ac)(this, n)) return [];
-                let t = E.ac(this, n).session ? .namespaces;
+                let t = E.ac(this, n).session ?.namespaces;
                 if (!t) return [];
                 let e = F(t),
-                    r = e[R] ? .methods;
-                return r ? ? []
+                    r = e[R] ?.methods;
+                return r ?? []
             }
         },
         92799: function(t, e, r) {
@@ -4297,8 +4297,8 @@
                 apiKey: t
             }) {
                 return function(e) {
-                    let r = e.rpcUrls.alchemy ? .http[0],
-                        n = e.rpcUrls.alchemy ? .webSocket ? .[0];
+                    let r = e.rpcUrls.alchemy ?.http[0],
+                        n = e.rpcUrls.alchemy ?.webSocket ?.[0];
                     return r ? {
                         chain: { ...e,
                             rpcUrls: { ...e.rpcUrls,

@@ -2089,9 +2089,9 @@
                             }, [o, a]), o.suspense && l.isLoading && l.isFetching && !n) throw a.fetchOptimistic(o).then(({
                             data: t
                         }) => {
-                            o.onSuccess ? .(t), o.onSettled ? .(t, null)
+                            o.onSuccess ?.(t), o.onSettled ?.(t, null)
                         }).catch(t => {
-                            u.clearReset(), o.onError ? .(t), o.onSettled ? .(void 0, t)
+                            u.clearReset(), o.onError ?.(t), o.onSettled ?.(void 0, t)
                         });
                         if (l.isError && !u.isReset() && !l.isFetching && (r = o.useErrorBoundary, i = [l.error, a.getCurrentQuery()], "function" == typeof r ? r(...i) : !!r)) throw l.error;
                         let c = "loading" === l.status && "idle" === l.fetchStatus ? "idle" : l.status,
@@ -2220,14 +2220,14 @@
                             chainId: t
                         }), () => (0, Z.jr)({
                             chainId: t
-                        }), t => t, (t, e) => t ? .uid === e ? .uid)
+                        }), t => t, (t, e) => t ?.uid === e ?.uid)
                     }({
                         chainId: h
                     }),
                     p = tF();
                 return $.useEffect(() => {
                     if (!r || !u && !o) return;
-                    let t = f ? ? d,
+                    let t = f ?? d,
                         e = t.watchBlockNumber({
                             onBlockNumber: t => {
                                 u && p.setQueryData(tM({
@@ -2308,11 +2308,11 @@
                     n = $.useRef(),
                     u = n.current;
                 return $.useEffect(() => {
-                    u ? .status !== "connected" && "connected" === s.status && t ? .({
+                    u ?.status !== "connected" && "connected" === s.status && t ?.({
                         address: s.address,
                         connector: s.connector,
-                        isReconnected: u ? .status === "reconnecting" || u ? .status === void 0
-                    }), u ? .status === "connected" && "disconnected" === s.status && e ? .(), n.current = s
+                        isReconnected: u ?.status === "reconnecting" || u ?.status === void 0
+                    }), u ?.status === "connected" && "disconnected" === s.status && e ?.(), n.current = s
                 }, [t, e, u, s]), s
             }
 
@@ -2435,12 +2435,12 @@
                         onSuccess: n
                     }),
                     b = $.useCallback(r => f({
-                        chainId: r ? .chainId ? ? t,
-                        connector: r ? .connector ? ? e
+                        chainId: r ?.chainId ?? t,
+                        connector: r ?.connector ?? e
                     }), [t, e, f]),
                     g = $.useCallback(r => p({
-                        chainId: r ? .chainId ? ? t,
-                        connector: r ? .connector ? ? e
+                        chainId: r ?.chainId ?? t,
+                        connector: r ?.connector ?? e
                     }), [t, e, p]);
                 return {
                     connect: b,
@@ -2452,7 +2452,7 @@
                     isIdle: c,
                     isLoading: h,
                     isSuccess: d,
-                    pendingConnector: m ? .connector,
+                    pendingConnector: m ?.connector,
                     reset: y,
                     status: v,
                     variables: m
@@ -2622,10 +2622,10 @@
                         onSuccess: n
                     }),
                     O = $.useCallback(e => v({
-                        chainId: e ? ? t
+                        chainId: e ?? t
                     }), [t, v]),
                     q = $.useCallback(e => m({
-                        chainId: e ? ? t
+                        chainId: e ?? t
                     }), [t, m]);
                 $.useEffect(() => {
                     let t = a.subscribe(({
@@ -2637,16 +2637,16 @@
                     }), l);
                     return t
                 }, [a, l]);
-                let R = !!a.connector ? .switchChain;
+                let R = !!a.connector ?.switchChain;
                 return (e || R) && (u = O, o = q), {
-                    chains: a.chains ? ? [],
+                    chains: a.chains ?? [],
                     data: c,
                     error: h,
                     isError: d,
                     isIdle: f,
                     isLoading: p,
                     isSuccess: y,
-                    pendingChainId: C ? .chainId,
+                    pendingChainId: C ?.chainId,
                     reset: b,
                     status: g,
                     switchNetwork: u,
@@ -2690,7 +2690,7 @@
                         scopeKey: q || u ? void 0 : "idle",
                         watch: q
                     }),
-                    w = s ? ? S,
+                    w = s ?? S,
                     E = $.useMemo(() => (function({
                         account: t,
                         address: e,
@@ -2755,7 +2755,7 @@
                             chainId: u,
                             abi: t,
                             functionName: o
-                        }) ? ? null
+                        }) ?? null
                     }
                 }({
                     abi: t
